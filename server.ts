@@ -1,5 +1,7 @@
 //Express Application 
 import express from 'express'
+import mongoose, { mongo } from 'mongoose'
+
 
 // const express = require('express') // first we require express here by instantiating it here this is for vanilla js
 const app = express() // then we put express function in a variable 
@@ -16,6 +18,13 @@ app.get('/blog', (req: express.Request, res:express.Response)=>{
 
 
 
-app.listen(port, ()=>{ // we listen/run here in port 3000
-    console.log('Node API app is running on port 3000')
-})
+
+
+
+mongoose.connect('mongodb+srv://admin:admin@justinrestapi.n2etfxn.mongodb.net/Node-API?retryWrites=true&w=majority').then(()=>{ //connect to db using mongoose
+    console.log('Connected to MongoDB')
+    app.listen(port, ()=>{ // we listen/run here in port 3000
+        console.log('Node API app is running on port 3000')
+    })
+        
+}).catch((error)=>{console.log(error)})
